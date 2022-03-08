@@ -1,24 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const food = ["spaghetti", "ice cream", "sushi", "bologna", "cheese"];
+  const [query, setQuery] = useState("");
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input type="text" onChange={(e) => setQuery(e.target.value)} />
+      {food
+        .filter((item) => {
+          if (query === "") {
+            return item;
+          } else if (item.includes(query)) {
+            return item;
+          }
+        })
+        .map((item) => (
+          <div key={item}>
+            <h2>{item}</h2>
+          </div>
+        ))}
     </div>
   );
 }
